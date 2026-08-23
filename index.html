@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confidentialité — APOTHEOSIS</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #0C0D11;
+    --bg-warm: #141016;
+    --surface: #16181F;
+    --surface-elev: #1E212A;
+    --border: #2A2E37;
+    --border-soft: #20232B;
+    --text: #F4F2EE;
+    --text-secondary: #9DA2AD;
+    --text-muted: #646975;
+    --accent: #FB923C;
+    --accent-bright: #FDBA74;
+    --accent-deep: #F97316;
+    --accent-dim: #2A1C0E;
+    --success: #5BD98A;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: radial-gradient(120% 90% at 50% -10%, var(--bg-warm) 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent-dim); color: var(--accent-bright); }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mark svg { display: block; }
+
+  .wordmark {
+    font-family: 'Antonio', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    color: var(--text);
+  }
+
+  .langswitch {
+    display: inline-flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .langswitch button {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .langswitch button:hover { color: var(--text); }
+
+  .langswitch button.active {
+    background: var(--accent-dim);
+    color: var(--accent-bright);
+  }
+
+  .langswitch button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .eyebrow {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+
+  .meta {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0 0 32px;
+  }
+
+  .summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 14px;
+    padding: 20px 22px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 48px;
+  }
+
+  .summary strong { color: var(--accent-bright); font-weight: 600; }
+
+  section {
+    margin-bottom: 40px;
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .sec-num {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border-radius: 7px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+    letter-spacing: -0.2px;
+  }
+
+  section p, section li {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 62ch;
+  }
+
+  section p { margin: 0 0 12px; }
+
+  section ul { margin: 0 0 12px; padding-left: 20px; }
+  section li { margin-bottom: 8px; }
+
+  section a {
+    color: var(--accent-bright);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(253, 186, 116, 0.35);
+  }
+  section a:hover { border-bottom-color: var(--accent-bright); }
+
+  .pillrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 16px; }
+
+  .pill {
+    font-family: 'Sora', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--surface-elev);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 13px;
+  }
+
+  .datatable {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 4px 0 16px;
+  }
+
+  .drow {
+    display: grid;
+    grid-template-columns: minmax(120px, 34%) 1fr;
+    gap: 16px;
+    padding: 14px 18px;
+    background: var(--surface);
+  }
+  .drow + .drow { border-top: 1px solid var(--border-soft); }
+
+  .drow dt {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--text);
+  }
+  .drow dd {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .badge-local { color: var(--success); }
+  .badge-google { color: var(--accent-bright); }
+
+  .contact {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+
+  .contact a.email {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent-bright);
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .drow { grid-template-columns: 1fr; gap: 4px; }
+    header.top { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="mark">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="13.5" fill="#0C0D11" stroke="#2A2E37"/>
+        <circle cx="15" cy="16.5" r="7" fill="url(#g)"/>
+        <path d="M11 15.5 15 11.5 19 15.5" stroke="#3D2711" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="g" x1="9" y1="10" x2="21" y2="23" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FDBA74"/>
+            <stop offset="1" stop-color="#F97316"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="wordmark">APOTHEOSIS</span>
+    </div>
+    <div class="langswitch" role="group" aria-label="Langue / Language">
+      <button type="button" data-lang-btn="fr" class="active">FR</button>
+      <button type="button" data-lang-btn="en">EN</button>
+    </div>
+  </header>
+
+  <p class="eyebrow" data-fr="Document légal" data-en="Legal document">Document légal</p>
+  <h1 data-fr="Politique de confidentialité" data-en="Privacy Policy">Politique de confidentialité</h1>
+  <p class="meta" data-fr="Dernière mise à jour : 23 août 2026 — s’applique à l’app mobile APOTHEOSIS (com.kr.apotheosis.app)" data-en="Last updated: August 23, 2026 — applies to the APOTHEOSIS mobile app (com.kr.apotheosis.app)">Dernière mise à jour : 23 août 2026 — s’applique à l’app mobile APOTHEOSIS (com.kr.apotheosis.app)</p>
+
+  <div class="summary" data-fr='En clair : APOTHEOSIS ne collecte aucune donnée personnelle et n’a pas de compte utilisateur. Votre progression reste <strong>sur votre appareil</strong>. Seule la régie publicitaire Google AdMob, qui finance l’app, traite des données techniques pour afficher des publicités — voir section 4.' data-en='In short: APOTHEOSIS collects no personal data and has no user account. Your progress stays <strong>on your device</strong>. Only Google AdMob, which funds the app, processes technical data to serve ads — see section 4.'>
+    En clair : APOTHEOSIS ne collecte aucune donnée personnelle et n’a pas de compte utilisateur. Votre progression reste <strong>sur votre appareil</strong>. Seule la régie publicitaire Google AdMob, qui finance l’app, traite des données techniques pour afficher des publicités — voir section 4.
+  </div>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">1</span><h2 data-fr="Qui nous sommes" data-en="Who we are">Qui nous sommes</h2></div>
+    <p data-fr="APOTHEOSIS est développée par un éditeur indépendant. L’app n’a pas de serveur : elle ne se connecte à aucun backend qui nous appartient, et nous n’avons donc accès à aucune de vos données personnelles ni de vos données d’entraînement." data-en="APOTHEOSIS is built by an independent developer. The app has no server: it never connects to any backend we own, so we never have access to your personal data or your training data.">
+      APOTHEOSIS est développée par un éditeur indépendant. L’app n’a pas de serveur : elle ne se connecte à aucun backend qui nous appartient, et nous n’avons donc accès à aucune de vos données personnelles ni de vos données d’entraînement.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">2</span><h2 data-fr="Ce que l’app stocke sur votre appareil" data-en="What the app stores on your device">Ce que l’app stocke sur votre appareil</h2></div>
+    <p data-fr="Vos réglages et votre progression sont enregistrés localement (AsyncStorage), uniquement sur votre téléphone :" data-en="Your settings and progress are saved locally (AsyncStorage), only on your phone:">
+      Vos réglages et votre progression sont enregistrés localement (AsyncStorage), uniquement sur votre téléphone :
+    </p>
+    <div class="pillrow">
+      <span class="pill" data-fr="Objectif & style d’entraînement" data-en="Goal & training style">Objectif &amp; style d’entraînement</span>
+      <span class="pill" data-fr="Résultats des séances" data-en="Session results">Résultats des séances</span>
+      <span class="pill" data-fr="Niveau atteint" data-en="Level reached">Niveau atteint</span>
+      <span class="pill" data-fr="Préférences (langue, son, vibrations)" data-en="Preferences (language, sound, haptics)">Préférences (langue, son, vibrations)</span>
+    </div>
+    <p data-fr="Ces informations ne quittent jamais votre appareil, sauf si vous utilisez vous-même la fonction « Exporter » des Réglages pour en faire une copie (fichier JSON que vous partagez où vous voulez). Elles sont supprimées si vous désinstallez l’app ou utilisez « Réinitialiser » dans les Réglages." data-en="This information never leaves your device, unless you use the “Export” feature in Settings yourself to make a copy (a JSON file you share wherever you choose). It is deleted if you uninstall the app or use “Reset” in Settings.">
+      Ces informations ne quittent jamais votre appareil, sauf si vous utilisez vous-même la fonction « Exporter » des Réglages pour en faire une copie (fichier JSON que vous partagez où vous voulez). Elles sont supprimées si vous désinstallez l’app ou utilisez « Réinitialiser » dans les Réglages.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">3</span><h2 data-fr="Ce que nous ne faisons pas" data-en="What we don't do">Ce que nous ne faisons pas</h2></div>
+    <ul>
+      <li data-fr="Pas de compte, pas d’email, pas de mot de passe demandé" data-en="No account, no email, no password required">Pas de compte, pas d’email, pas de mot de passe demandé</li>
+      <li data-fr="Pas d’outil d’analyse ou de mesure d’audience (aucun SDK de type analytics)" data-en="No analytics or audience-measurement tool (no analytics SDK)">Pas d’outil d’analyse ou de mesure d’audience (aucun SDK de type analytics)</li>
+      <li data-fr="Pas de vente de données — nous n’en avons pas à vendre" data-en="No sale of data — we have none to sell">Pas de vente de données — nous n’en avons pas à vendre</li>
+      <li data-fr="Pas de géolocalisation, pas d’accès à vos contacts, photos ou caméra" data-en="No location tracking, no access to your contacts, photos or camera">Pas de géolocalisation, pas d’accès à vos contacts, photos ou caméra</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">4</span><h2 data-fr="Publicités (Google AdMob)" data-en="Advertising (Google AdMob)">Publicités (Google AdMob)</h2></div>
+    <p data-fr="L’app est gratuite et financée par des publicités affichées via Google AdMob (bannière et, occasionnellement, publicité pleine page entre les séances). Pour fonctionner, AdMob peut traiter sur votre appareil : un identifiant publicitaire, des données techniques (modèle d’appareil, système, adresse IP approximative) et des données d’interaction avec les publicités. Ce traitement est effectué par Google, pas par nous — il est décrit dans la" data-en="The app is free and funded by ads served through Google AdMob (a banner, and occasionally a full-screen ad between sessions). To work, AdMob may process on your device: an advertising identifier, technical data (device model, OS, approximate IP address) and ad-interaction data. This processing is done by Google, not by us — it is described in Google’s">
+      L’app est gratuite et financée par des publicités affichées via Google AdMob (bannière et, occasionnellement, publicité pleine page entre les séances). Pour fonctionner, AdMob peut traiter sur votre appareil : un identifiant publicitaire, des données techniques (modèle d’appareil, système, adresse IP approximative) et des données d’interaction avec les publicités. Ce traitement est effectué par Google, pas par nous — il est décrit dans la
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" data-fr="politique de confidentialité de Google" data-en="Google Privacy Policy">politique de confidentialité de Google</a>
+      <span data-fr=" et la " data-en=" and the "> et la </span>
+      <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener" data-fr="politique publicitaire de Google" data-en="Google Ads Policy">politique publicitaire de Google</a>.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">5</span><h2 data-fr="Votre consentement publicitaire (RGPD)" data-en="Your ad consent (GDPR)">Votre consentement publicitaire (RGPD)</h2></div>
+    <p data-fr="Si vous êtes dans l’Espace économique européen, au Royaume-Uni ou en Suisse, un écran de consentement (fourni par le UMP de Google) s’affiche au premier lancement pour vous laisser choisir le niveau de personnalisation des publicités. Vous pouvez revenir sur ce choix à tout moment depuis Réglages → « Gérer le consentement publicitaire »." data-en="If you're in the European Economic Area, the UK, or Switzerland, a consent screen (powered by Google's UMP) appears on first launch so you can choose your ad personalization level. You can revisit this choice anytime from Settings → “Manage ad consent.”">
+      Si vous êtes dans l’Espace économique européen, au Royaume-Uni ou en Suisse, un écran de consentement (fourni par le UMP de Google) s’affiche au premier lancement pour vous laisser choisir le niveau de personnalisation des publicités. Vous pouvez revenir sur ce choix à tout moment depuis Réglages → « Gérer le consentement publicitaire ».
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">6</span><h2 data-fr="Résumé des données" data-en="Data summary">Résumé des données</h2></div>
+    <div class="datatable">
+      <div class="drow">
+        <dt data-fr="Progression & réglages" data-en="Progress & settings">Progression &amp; réglages</dt>
+        <dd><span class="badge-local" data-fr="● Local uniquement" data-en="● Local only">● Local uniquement</span> — <span data-fr="jamais transmis" data-en="never transmitted">jamais transmis</span></dd>
+      </div>
+      <div class="drow">
+        <dt data-fr="Identifiant publicitaire" data-en="Advertising identifier">Identifiant publicitaire</dt>
+        <dd><span class="badge-google" data-fr="● Traité par Google AdMob" data-en="● Processed by Google AdMob">● Traité par Google AdMob</span> — <span data-fr="selon votre consentement" data-en="based on your consent">selon votre consentement</span></dd>
+      </div>
+      <div class="drow">
+        <dt data-fr="Export manuel (JSON)" data-en="Manual export (JSON)">Export manuel (JSON)</dt>
+        <dd data-fr="Généré à votre demande, partagé où vous choisissez" data-en="Generated on request, shared wherever you choose">Généré à votre demande, partagé où vous choisissez</dd>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">7</span><h2 data-fr="Vos droits" data-en="Your rights">Vos droits</h2></div>
+    <p data-fr="Comme vos données restent sur votre appareil, vous les contrôlez directement, sans avoir à nous contacter :" data-en="Since your data stays on your device, you control it directly, without needing to contact us:">
+      Comme vos données restent sur votre appareil, vous les contrôlez directement, sans avoir à nous contacter :
+    </p>
+    <ul>
+      <li data-fr="Accès & portabilité : Réglages → Exporter" data-en="Access & portability: Settings → Export">Accès &amp; portabilité : Réglages → Exporter</li>
+      <li data-fr="Suppression : Réglages → Réinitialiser, ou désinstaller l’app" data-en="Deletion: Settings → Reset, or uninstall the app">Suppression : Réglages → Réinitialiser, ou désinstaller l’app</li>
+      <li data-fr="Publicité personnalisée : Réglages → Gérer le consentement publicitaire" data-en="Ad personalization: Settings → Manage ad consent">Publicité personnalisée : Réglages → Gérer le consentement publicitaire</li>
+    </ul>
+    <p data-fr="Pour toute question sur le traitement fait par Google AdMob lui-même, adressez-vous directement à Google via les liens de la section 4." data-en="For any question about processing done by Google AdMob itself, contact Google directly via the links in section 4.">
+      Pour toute question sur le traitement fait par Google AdMob lui-même, adressez-vous directement à Google via les liens de la section 4.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">8</span><h2 data-fr="Confidentialité des mineurs" data-en="Children's privacy">Confidentialité des mineurs</h2></div>
+    <p data-fr="APOTHEOSIS ne s’adresse pas aux enfants de moins de 13 ans et nous ne collectons sciemment aucune donnée les concernant. Les publicités affichées ne sont pas ciblées vers les enfants." data-en="APOTHEOSIS is not directed at children under 13, and we do not knowingly collect any data about them. Ads shown are not targeted at children.">
+      APOTHEOSIS ne s’adresse pas aux enfants de moins de 13 ans et nous ne collectons sciemment aucune donnée les concernant. Les publicités affichées ne sont pas ciblées vers les enfants.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">9</span><h2 data-fr="Modifications" data-en="Changes">Modifications</h2></div>
+    <p data-fr="Si cette politique évolue (par exemple avec l’ajout d’une fonctionnalité qui change les données traitées), la date en haut de page sera mise à jour. Un usage continu de l’app après une modification vaut acceptation de la nouvelle version." data-en="If this policy changes (for example, a new feature that changes what data is processed), the date at the top of the page will be updated. Continued use of the app after a change constitutes acceptance of the new version.">
+      Si cette politique évolue (par exemple avec l’ajout d’une fonctionnalité qui change les données traitées), la date en haut de page sera mise à jour. Un usage continu de l’app après une modification vaut acceptation de la nouvelle version.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">10</span><h2 data-fr="Contact" data-en="Contact">Contact</h2></div>
+    <div class="contact">
+      <p data-fr="Une question sur cette politique ? Écrivez-nous :" data-en="A question about this policy? Write to us:" style="margin-bottom: 10px;">Une question sur cette politique ? Écrivez-nous :</p>
+      <a class="email" href="mailto:contact@apotheosis-app.com">contact@apotheosis-app.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>APOTHEOSIS</span>
+    <span data-fr="com.kr.apotheosis.app" data-en="com.kr.apotheosis.app">com.kr.apotheosis.app</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var KEY = 'apotheosis-privacy-lang';
+    var buttons = document.querySelectorAll('[data-lang-btn]');
+    var nodes = document.querySelectorAll('[data-fr]');
+
+    function apply(lang) {
+      nodes.forEach(function (el) {
+        var val = el.getAttribute('data-' + lang);
+        if (val !== null) el.innerHTML = val;
+      });
+      buttons.forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang-btn') === lang);
+      });
+      document.documentElement.setAttribute('lang', lang);
+      try { localStorage.setItem(KEY, lang); } catch (e) {}
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        apply(b.getAttribute('data-lang-btn'));
+      });
+    });
+
+    var saved = 'fr';
+    try { saved = localStorage.getItem(KEY) || 'fr'; } catch (e) {}
+    apply(saved);
+  })();
+</script>
+</body>
+</html>
